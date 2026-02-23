@@ -11,6 +11,9 @@ namespace Main.Player.Hp.Model
         private ReactiveProperty<int> _current = new();
         public ReadOnlyReactiveProperty<int> Current => _current;
 
+        private ReactiveProperty<bool> _onDead = new();
+        public ReadOnlyReactiveProperty<bool> OnDead => _onDead;
+
         private int _max;
         public int Max => _max;
 
@@ -27,6 +30,7 @@ namespace Main.Player.Hp.Model
         {
             var tmp = _current.Value - value;
             _current.Value = Math.Clamp(tmp, 0, _max);
+            if (_current.Value == 0) _onDead.Value = true;
         }
     }
 }

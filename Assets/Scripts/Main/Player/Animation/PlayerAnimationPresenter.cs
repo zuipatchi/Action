@@ -22,7 +22,7 @@ namespace Main.Player.Animation
 
             _playerModel.OnDash.Subscribe(_ =>
             {
-               _animator.SetTrigger("Dash"); 
+                _animator.SetTrigger("Dash");
             });
 
             _playerModel.MoveInput.Subscribe(v =>
@@ -33,6 +33,11 @@ namespace Main.Player.Animation
             _playerModel.OnDamage.Subscribe(_ =>
             {
                 _animator.SetTrigger("Damage");
+            });
+
+            _playerModel.OnDead.Subscribe(onDead =>
+            {
+                if (onDead) _animator.SetTrigger("Dead");
             });
         }
     }
