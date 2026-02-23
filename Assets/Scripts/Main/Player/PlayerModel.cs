@@ -28,6 +28,8 @@ namespace Main.Player
 
         public ReadOnlyReactiveProperty<int> CurrentHp => _playerHpModel.Current;
 
+        public ReadOnlyReactiveProperty<bool> OnDead => _playerHpModel.OnDead;
+
         [Inject]
         public PlayerModel(DashState dashState, PlayerHpModel playerHpModel)
         {
@@ -39,6 +41,9 @@ namespace Main.Player
 
         public Vector2 GetMoveInput()
         {
+            // 死んだら移動不可
+            if (OnDead.CurrentValue) return new Vector2(0, 0);
+
             return _moveInput.Value;
         }
 

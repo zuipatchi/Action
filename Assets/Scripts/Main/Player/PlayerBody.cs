@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using R3;
 using UnityEngine;
 using VContainer;
 
@@ -16,6 +17,14 @@ namespace Main.Player
         public void Construct(PlayerModel playerModel)
         {
             _playerModel = playerModel;
+        }
+
+        private void Start()
+        {
+            _playerModel.OnDead.Subscribe(onDead =>
+            {
+                if (onDead) Destroy(gameObject,2f);
+            });
         }
 
         private void OnTriggerEnter(Collider other)
