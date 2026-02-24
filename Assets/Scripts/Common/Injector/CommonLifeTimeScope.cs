@@ -14,8 +14,10 @@ namespace Common.Injector
             builder.RegisterEntryPoint<ModalStore>(Lifetime.Singleton).AsSelf();
             builder.RegisterComponentInHierarchy<OptionPresenter>().AsSelf();
             builder.RegisterEntryPoint<OptionModel>(Lifetime.Singleton).AsSelf();
+
             builder.RegisterComponentInHierarchy<SoundPlayer>().AsSelf();
             builder.RegisterEntryPoint<SoundStore>(Lifetime.Singleton).AsSelf();
+
             builder.RegisterComponentInHierarchy<SceneTransitioner>().AsSelf();
         }
     }

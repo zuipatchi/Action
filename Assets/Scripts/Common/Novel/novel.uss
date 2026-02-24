@@ -1,0 +1,109 @@
+.novel-root {
+    position: absolute;
+    left: 0; right: 0; top: 0; bottom: 0;
+
+    /* 背景上に乗せるので基本は触らない。入力拾うならここ */
+    justify-content: flex-end;
+}
+
+.novel-bottom {
+    width: 100%;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 24px;
+    align-items: center;
+}
+
+.novel-window {
+    width: 100%;
+    max-width: 980px;
+    min-height: 170px;
+
+    padding: 18px 18px 14px 18px;
+
+    border-radius: 16px;
+
+    /* ガラスっぽい半透明 */
+    background-color: rgba(0, 0, 0, 0.70);
+
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-color: rgba(255,255,255,0.18);
+    border-right-color: rgba(255,255,255,0.18);
+    border-top-color: rgba(255,255,255,0.18);
+    border-bottom-color: rgba(255,255,255,0.18);
+
+    /* 影 */
+    unity-text-outline-width: 0px;
+}
+
+.novel-header {
+    /* height: 28px;  ←消す */
+    margin-bottom: 10px;
+
+    justify-content: flex-start;
+    align-items: center;   /* 縦中央 */
+}
+
+.novel-name-plate {
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+
+    border-radius: 999px;
+    background-color: rgba(255,255,255,0.12);
+
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-color: rgba(255,255,255,0.18);
+    border-right-color: rgba(255,255,255,0.18);
+    border-top-color: rgba(255,255,255,0.18);
+    border-bottom-color: rgba(255,255,255,0.18);
+
+    align-self: flex-start; /* 余計な伸び防止 */
+}
+
+.novel-name {
+    font-size: 14px;
+    unity-font-style: bold;
+
+    /* 長い名前の時に見切れを綺麗に（任意） */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    /* Labelの余計な上下を感じるなら微調整（任意） */
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.novel-message {
+    font-size: 20px;
+    white-space: normal;
+
+    /* 行間と余白で読みやすく */
+    line-height: 24px;
+    margin-bottom: 10px;
+}
+
+.novel-footer {
+    width: 100%;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.novel-hint {
+    font-size: 12px;
+    opacity: 0.75;
+}
+
+.novel-name,
+.novel-message,
+.novel-hint {
+    color: white;
+}
