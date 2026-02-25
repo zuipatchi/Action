@@ -16,39 +16,49 @@ namespace Common.Novel
         private VisualElement _root;
 
         private readonly Subject<Unit> _onClick = new();
-
         private CancellationTokenSource _lineCts;
 
-        private void Awake()
+        private bool _initialized;
+
+        private void OnEnable()
         {
+            TryInitialize();
+        }
+
+        private void TryInitialize()
+        {
+            if (_initialized) return;
+
             var uiDocument = GetComponent<UIDocument>();
             _root = uiDocument.rootVisualElement;
+
+            if (_root == null) return; // まだパネルが出来てない可能性
+
             _nameLabel = _root.Q<Label>("nameLabel");
             _messageLabel = _root.Q<Label>("messageLabel");
 
             _root.RegisterCallback<ClickEvent>(_ => _onClick.OnNext(Unit.Default));
+
+            _initialized = true;
         }
 
-        /// <summary>
-        /// 1行表示。クリックで全文→次へ。戻りは「次へ」まで待つ。
-        /// </summary>
         public async UniTask ShowLineAsync(string speaker, string text, CancellationToken externalCt = default)
         {
-            CancelCurrentLine();
+            // text が null だと Length/Substring で落ちる
+            text ??= string.Empty;
 
+            CancelCurrentLine();
             _lineCts = CancellationTokenSource.CreateLinkedTokenSource(externalCt);
             var ct = _lineCts.Token;
 
-            _nameLabel.text = speaker;
+            _nameLabel.text = speaker ?? string.Empty;
             _messageLabel.text = "";
 
             var isTyping = true;
             var fullyShown = false;
 
-            // 「次へ」待ち（全文表示後のクリック）
             var nextTcs = new UniTaskCompletionSource();
 
-            // クリック購読：文字送り中は全文表示、全文後は次へ
             var clickDisp = _onClick.Subscribe(_ =>
             {
                 if (ct.IsCancellationRequested) return;
@@ -67,7 +77,6 @@ namespace Common.Novel
 
             try
             {
-                // タイプライター本体
                 var delayMs = Mathf.Max(1, Mathf.RoundToInt(1000f / Mathf.Max(1f, _charsPerSecond)));
 
                 for (int i = 0; i < text.Length; i++)
@@ -82,7 +91,6 @@ namespace Common.Novel
                 isTyping = false;
                 fullyShown = true;
 
-                // 「次へ」クリックまで待つ
                 await nextTcs.Task.AttachExternalCancellation(ct);
             }
             finally
