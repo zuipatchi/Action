@@ -8,6 +8,12 @@ public class TestCoordinator : MonoBehaviour
 
     private void Start()
     {
+        GetNovelManager();
+        _novelManager.PlayTutorial();
+    }
+
+    private void GetNovelManager()
+    {
         var scene = SceneManager.GetSceneByName("Common");
         if (scene.isLoaded)
         {
@@ -20,6 +26,5 @@ public class TestCoordinator : MonoBehaviour
                 }
             }
         }
-        _novelManager.PlayTutorial();
     }
 }
