@@ -11,8 +11,8 @@ namespace Common.SceneManagement
     {
         Common = 0,
         Title = 1,
-        Main = 2,
-        Sample = 3
+        Tutorial = 2,
+        Main = 3
     }
     /// <summary>
     /// アクティブシーンを変更するクラス

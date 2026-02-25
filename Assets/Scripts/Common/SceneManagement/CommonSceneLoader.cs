@@ -8,6 +8,7 @@ namespace Common.SceneManagement
     // 共通シーンをロードするクラス
     public class CommonSceneLoader : MonoBehaviour
     {
+        [SerializeField] private SceneTransitioner _sceneTransitioner;
         private static bool _loaded = false;
 
         private async void Awake()
@@ -23,6 +24,13 @@ namespace Common.SceneManagement
             {
                 var token = this.GetCancellationTokenOnDestroy();
                 await SceneManager.LoadSceneAsync(0, LoadSceneMode.Additive).WithCancellation(token);
+            }
+
+            // 共通シーンがアクティブな場合はタイトルシーンに遷移する
+            var activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            if (activeSceneIndex == 0)
+            {
+                _sceneTransitioner.Transit(Scenes.Title).Forget();
             }
 
             BuildLifetimeScopeInActiveScene();
