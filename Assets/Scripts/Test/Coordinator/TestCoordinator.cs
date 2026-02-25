@@ -9,7 +9,6 @@ public class TestCoordinator : MonoBehaviour
     private void Start()
     {
         GetNovelManager();
-        _novelManager.PlayTutorial();
     }
 
     private void GetNovelManager()

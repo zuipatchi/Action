@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a28ba8390ca017f49bc43dadf72a82b3, type: 3}
-  m_Name: Tutorial
+  m_Name: Tutorial1
   m_EditorClassIdentifier: Assembly-CSharp::Scenario
   _lines:
   - _speaker: "\u3071\u3063\u3061\u3071\u3063\u3061\u535A\u58EB"
@@ -20,4 +20,4 @@ MonoBehaviour:
   - _speaker: "\u3071\u3063\u3061\u3071\u3063\u3061\u535A\u58EB"
     _text: "\u304A\u6563\u6B69\u3092\u697D\u3057\u3080\u30D1\u30C1"
   - _speaker: "\u3042\u306A\u305F"
-    _text: "\u3069\u3053\u306B\u5411\u304B\u3048\u3070\u3044\u3044\u3093\u3060\u308D\u3046\uFF1F\uFF1F"
+    _text: "\u3068\u308A\u3042\u3048\u305A\u9032\u3093\u3067\u307F\u308B\u304B"

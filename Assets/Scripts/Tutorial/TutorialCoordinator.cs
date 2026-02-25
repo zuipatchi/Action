@@ -1,57 +1,103 @@
+using System;
 using Common.Novel;
+using Main.Player;
 using R3;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using VContainer;
+using VContainer.Unity;
 
-public class TutorialCoordinator : MonoBehaviour
+namespace Turtorial
 {
-    [SerializeField] private EnemySpawner _enemySpawner;
-    private enum State { Novel, Battle }
-    private NovelManager _novelManager;
-    private State _currentState;
-    private readonly CompositeDisposable _disposables = new();
-
-    private void Start()
+    /// <summary>
+    /// ゲーム全体の進行に責務を持つ
+    /// </summary>
+    public class TutorialCoordinator : IStartable, IDisposable
     {
-        _novelManager = GetNovelManager();
-        EnterState(State.Novel);
-    }
+        private enum State { Novel1, Stroll, Novel2, Battle }
+        private State _currentState;
 
-    private void EnterState(State nextState)
-    {
-        _currentState = nextState;
+        private EnemySpawner _enemySpawner;
+        private CheckPoint _checkPoint;
+        private NovelManager _novelManager;
+        private PlayerModel _playerModel;
 
-        switch (_currentState)
+        private readonly CompositeDisposable _disposables = new();
+
+        [Inject]
+        public TutorialCoordinator(EnemySpawner enemySpawner, CheckPoint checkPoint, PlayerModel playerModel)
         {
-            case State.Novel:
-                _novelManager.OnFinished
-                    .Take(1)
-                    .Subscribe(_ => EnterState(State.Battle))
-                    .AddTo(_disposables);
-                _novelManager.PlayTutorial();
-                break;
-
-            case State.Battle:
-                _enemySpawner.Spawn();
-                break;
+            _enemySpawner = enemySpawner;
+            _checkPoint = checkPoint;
+            _playerModel = playerModel;
         }
-    }
 
-    private NovelManager GetNovelManager()
-    {
-        var scene = SceneManager.GetSceneByName("Common");
-        if (scene.isLoaded)
+        public void Start()
         {
-            var rootObjects = scene.GetRootGameObjects();
-            foreach (var root in rootObjects)
+            _novelManager = GetNovelManager();
+            EnterState(State.Novel1);
+        }
+
+        private void EnterState(State nextState)
+        {
+            _currentState = nextState;
+
+            switch (_currentState)
             {
-                if (root.name == "[LOGIC]")
-                {
-                    return root.transform.Find("NovelManager").GetComponent<NovelManager>();
-                }
+                case State.Novel1:
+                    _novelManager.PlayTutorial1();
+                    _playerModel.IsStop = true;
+                    _novelManager.OnFinished
+                        .Take(1)
+                        .Subscribe(_ => EnterState(State.Stroll))
+                        .AddTo(_disposables);
+                    break;
+
+                case State.Stroll:
+                    _playerModel.IsStop = false;
+                    _checkPoint.OnEnter
+                        .Take(1)
+                        .Subscribe(_ => EnterState(State.Novel2))
+                        .AddTo(_disposables);
+                    break;
+
+                case State.Novel2:
+                    _novelManager.PlayTutorial2();
+                    _novelManager.OnFinished
+                        .Take(1)
+                        .Subscribe(_ => EnterState(State.Battle))
+                        .AddTo(_disposables);
+                    _playerModel.IsStop = true;
+                    _enemySpawner.Spawn();
+                    break;
+
+                case State.Battle:
+                    _playerModel.IsStop = false;
+                    break;
             }
         }
-        Debug.LogError("NovelManagerが見つかりませんでした。");
-        return null;
+
+        private NovelManager GetNovelManager()
+        {
+            var scene = SceneManager.GetSceneByName("Common");
+            if (scene.isLoaded)
+            {
+                var rootObjects = scene.GetRootGameObjects();
+                foreach (var root in rootObjects)
+                {
+                    if (root.name == "[LOGIC]")
+                    {
+                        return root.transform.Find("NovelManager").GetComponent<NovelManager>();
+                    }
+                }
+            }
+            Debug.LogError("NovelManagerが見つかりませんでした。");
+            return null;
+        }
+
+        public void Dispose()
+        {
+            _disposables.Dispose();
+        }
     }
 }

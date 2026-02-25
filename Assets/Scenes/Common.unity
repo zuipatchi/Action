@@ -653,7 +653,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67e0a244c06569143b8f138f2a0d3151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Common.Novel.NovelManager
-  _tutorialScenario: {fileID: 11400000, guid: bd6643248cc509c4db9308373ea4a21f, type: 2}
+  _scenarios:
+  - {fileID: 11400000, guid: bd6643248cc509c4db9308373ea4a21f, type: 2}
+  - {fileID: 11400000, guid: 75dc55522947cff469961fab807f02fb, type: 2}
   _prefab: {fileID: 4524747102364555076, guid: 31464d786b84d48448739cf6f3aa6f7b, type: 3}
 --- !u!1 &1889126016
 GameObject:
