@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3857945862782182618}
   - component: {fileID: 4032002835703526168}
+  - component: {fileID: 7107180246488960497}
   m_Layer: 0
   m_Name: CommonSceneLoader
   m_TagString: Untagged
@@ -44,3 +45,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ddf59be24e142f48b08f17ef3243e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Common.CommonSceneLoader
+  _sceneTransitioner: {fileID: 7107180246488960497}
+--- !u!114 &7107180246488960497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8396222394263581024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4373141489c78e449a9d028d90a6e3e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Common.SceneManagement.SceneTransitioner
