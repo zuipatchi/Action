@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 
@@ -12,6 +13,12 @@ namespace Turtorial
         private void OnTriggerExit(Collider other)
         {
             if (!other.CompareTag(_targetTag)) return;
+            Publish().Forget();
+        }
+
+        private async UniTask Publish()
+        {
+            await UniTask.Delay(2000);
             _onDefeat.OnNext(Unit.Default);
         }
     }
