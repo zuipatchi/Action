@@ -6,11 +6,10 @@ using UnityEngine.UIElements;
 
 namespace Common.Novel
 {
-
-    public sealed class NovelTextBox : MonoBehaviour
+    [RequireComponent(typeof(UIDocument))]
+    public class NovelViewModel : MonoBehaviour
     {
-        [SerializeField] private UIDocument _uiDocument;
-        [SerializeField] private float _charsPerSecond = 45f;
+        private readonly float _charsPerSecond = 45f;
 
         private Label _nameLabel;
         private Label _messageLabel;
@@ -18,23 +17,16 @@ namespace Common.Novel
 
         private readonly Subject<Unit> _onClick = new();
 
-        // 現在の表示処理を止める用
         private CancellationTokenSource _lineCts;
 
         private void Awake()
         {
-            _root = _uiDocument.rootVisualElement;
+            var uiDocument = GetComponent<UIDocument>();
+            _root = uiDocument.rootVisualElement;
             _nameLabel = _root.Q<Label>("nameLabel");
             _messageLabel = _root.Q<Label>("messageLabel");
 
             _root.RegisterCallback<ClickEvent>(_ => _onClick.OnNext(Unit.Default));
-        }
-
-        private void OnDestroy()
-        {
-            _lineCts?.Cancel();
-            _lineCts?.Dispose();
-            _onClick?.Dispose();
         }
 
         /// <summary>
@@ -63,13 +55,13 @@ namespace Common.Novel
 
                 if (isTyping)
                 {
-                    isTyping = false;           // タイピングを止める合図
-                    _messageLabel.text = text;  // 全文表示
+                    isTyping = false;
+                    _messageLabel.text = text;
                     fullyShown = true;
                     return;
                 }
 
-                if (!fullyShown) return; // 念のため
+                if (!fullyShown) return;
                 nextTcs.TrySetResult();
             });
 
@@ -87,12 +79,7 @@ namespace Common.Novel
                     await UniTask.Delay(delayMs, cancellationToken: ct);
                 }
 
-                // 途中でクリックされて止まった場合でも、全文は出しておく
-                if (!_lineCts.IsCancellationRequested && _messageLabel.text != text)
-                {
-                    _messageLabel.text = text;
-                }
-
+                isTyping = false;
                 fullyShown = true;
 
                 // 「次へ」クリックまで待つ
@@ -110,6 +97,13 @@ namespace Common.Novel
             _lineCts.Cancel();
             _lineCts.Dispose();
             _lineCts = null;
+        }
+
+        private void OnDestroy()
+        {
+            _lineCts?.Cancel();
+            _lineCts?.Dispose();
+            _onClick?.Dispose();
         }
     }
 }

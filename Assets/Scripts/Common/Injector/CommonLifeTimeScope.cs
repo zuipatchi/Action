@@ -1,3 +1,4 @@
+using Common.Novel;
 using Common.Option;
 using Common.SceneManagement;
 using Common.SoundManagement;
@@ -11,6 +12,9 @@ namespace Common.Injector
     {
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.RegisterEntryPoint<NovelPresenter>(Lifetime.Scoped).AsSelf();
+            builder.RegisterComponentInHierarchy<NovelManager>().AsSelf();
+
             builder.RegisterEntryPoint<ModalStore>(Lifetime.Singleton).AsSelf();
             builder.RegisterComponentInHierarchy<OptionPresenter>().AsSelf();
             builder.RegisterEntryPoint<OptionModel>(Lifetime.Singleton).AsSelf();
