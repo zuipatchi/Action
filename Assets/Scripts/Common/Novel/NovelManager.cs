@@ -8,6 +8,8 @@ namespace Common.Novel
     {
         [SerializeField] private Scenario _tutorialScenario;
         [SerializeField] private GameObject _prefab;
+        private Subject<Unit> _onFinished = new();
+        public Observable<Unit> OnFinished => _onFinished;
 
         private Scenario _currentScenario;
         private int _index = 0;
@@ -21,6 +23,7 @@ namespace Common.Novel
 
         public void PlayTutorial()
         {
+            _index = 0;
             _currentScenario = _tutorialScenario;
             _currentLines.Value = _currentScenario.Lines[_index];
             CreateNovelInstance();
@@ -38,8 +41,9 @@ namespace Common.Novel
 
             if (_index >= _currentScenario.Lines.Length)
             {
-                Destroy(_instance);
                 _index = 0;
+                Destroy(_instance);
+                _onFinished.OnNext(Unit.Default);
                 return;
             }
 
