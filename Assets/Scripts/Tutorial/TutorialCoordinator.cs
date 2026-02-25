@@ -14,7 +14,7 @@ namespace Turtorial
     /// </summary>
     public class TutorialCoordinator : IStartable, IDisposable
     {
-        private enum State { Novel1, Stroll, Novel2, Battle }
+        private enum State { Novel1, Stroll, Novel2, Battle, Novel3 }
         private State _currentState;
 
         private EnemySpawner _enemySpawner;
@@ -72,6 +72,10 @@ namespace Turtorial
                     break;
 
                 case State.Battle:
+                    _playerModel.IsStop = false;
+                    break;
+
+                case State.Novel3:
                     _playerModel.IsStop = false;
                     break;
             }

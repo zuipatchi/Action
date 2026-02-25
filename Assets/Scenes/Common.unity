@@ -656,6 +656,7 @@ MonoBehaviour:
   _scenarios:
   - {fileID: 11400000, guid: bd6643248cc509c4db9308373ea4a21f, type: 2}
   - {fileID: 11400000, guid: 75dc55522947cff469961fab807f02fb, type: 2}
+  - {fileID: 11400000, guid: f41eba546eb965f4a90d8387adbfe4cb, type: 2}
   _prefab: {fileID: 4524747102364555076, guid: 31464d786b84d48448739cf6f3aa6f7b, type: 3}
 --- !u!1 &1889126016
 GameObject:

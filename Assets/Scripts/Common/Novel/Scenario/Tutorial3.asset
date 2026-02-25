@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a28ba8390ca017f49bc43dadf72a82b3, type: 3}
+  m_Name: Tutorial3
+  m_EditorClassIdentifier: Assembly-CSharp::Scenario
+  _lines:
+  - _speaker: "\u3071\u3063\u3061\u3071\u3063\u3061\u535A\u58EB"
+    _text: "\u3059\u3054\u3044\uFF01\n\u672C\u5F53\u306B\u5012\u3057\u3061\u3083\u3046\u306A\u3093\u3066"
+  - _speaker: "\u3042\u306A\u305F"
+    _text: "\u610F\u5916\u3068\u3042\u3063\u3051\u306A\u304B\u3063\u305F\u306A"
+  - _speaker: "\u3071\u3063\u3061\u3071\u3063\u3061\u535A\u58EB"
+    _text: "\u60F3\u50CF\u4EE5\u4E0A\u3060\uFF01\uFF01\n\u541B\u3092\u898B\u8FBC\u3093\u3067\u983C\u307F\u304C\u3042\u308B\u3001\u3053\u306E\u4E16\u754C\u3092\u6551\u3063\u3066\u307B\u3057\u3044\u3093\u3060"
+  - _speaker: "\u3042\u306A\u305F"
+    _text: "\u3088\u3057\u3001\u3084\u3063\u3066\u307F\u3088\u3046\uFF01"
+  - _speaker: "\u5929\u306E\u58F0"
+    _text: "\u4F53\u9A13\u7248\u306F\u4EE5\u4E0A\u3067\u3059\u3002\n\u7D9A\u304D\u306F\u88FD\u54C1\u7248\u3092\u304A\u697D\u3057\u307F\u304F\u3060\u3055\u3044"

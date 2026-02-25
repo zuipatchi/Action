@@ -34,6 +34,12 @@ namespace Common.Novel
             CreateNovelInstance();
         }
 
+        public void PlayTutorial3()
+        {
+            _currentScenario = _scenarios[2];
+            CreateNovelInstance();
+        }
+
         private void CreateNovelInstance()
         {
             if (_instance != null)
