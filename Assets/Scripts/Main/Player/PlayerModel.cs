@@ -23,6 +23,7 @@ namespace Main.Player
 
         private bool _isDamaged = false;
         public bool IsDamaged => _isDamaged;
+        public bool IsStop  {get; set;} = false;
 
         private readonly float _unableToMoveTime = 1f;
 

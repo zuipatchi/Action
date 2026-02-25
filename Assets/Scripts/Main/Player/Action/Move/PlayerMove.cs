@@ -30,6 +30,7 @@ namespace Main.Player.Action.Move
         private void Update()
         {
             if (_playerModel.IsDamaged) return;
+            if (_playerModel.IsStop) return;
 
             Vector3 moveDir = new Vector3(_playerModel.GetMoveInput().x, 0f, _playerModel.GetMoveInput().y);
             if (moveDir.sqrMagnitude <= 0f) return;
