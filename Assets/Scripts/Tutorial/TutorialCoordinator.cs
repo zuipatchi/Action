@@ -19,16 +19,22 @@ namespace Turtorial
 
         private EnemySpawner _enemySpawner;
         private CheckPoint _checkPoint;
+        private DeadChecker _deadChecker;
         private NovelManager _novelManager;
         private PlayerModel _playerModel;
 
         private readonly CompositeDisposable _disposables = new();
 
         [Inject]
-        public TutorialCoordinator(EnemySpawner enemySpawner, CheckPoint checkPoint, PlayerModel playerModel)
+        public TutorialCoordinator(
+            EnemySpawner enemySpawner,
+            CheckPoint checkPoint,
+            DeadChecker deadChecker,
+            PlayerModel playerModel)
         {
             _enemySpawner = enemySpawner;
             _checkPoint = checkPoint;
+            _deadChecker = deadChecker;
             _playerModel = playerModel;
         }
 
@@ -62,21 +68,26 @@ namespace Turtorial
                     break;
 
                 case State.Novel2:
+                    _playerModel.IsStop = true;
                     _novelManager.PlayTutorial2();
                     _novelManager.OnFinished
                         .Take(1)
                         .Subscribe(_ => EnterState(State.Battle))
                         .AddTo(_disposables);
-                    _playerModel.IsStop = true;
                     _enemySpawner.Spawn();
                     break;
 
                 case State.Battle:
                     _playerModel.IsStop = false;
+                    _deadChecker.OnDefeat
+                        .Take(1)
+                        .Subscribe(_ => EnterState(State.Novel3))
+                        .AddTo(_disposables);
                     break;
 
                 case State.Novel3:
-                    _playerModel.IsStop = false;
+                    _playerModel.IsStop = true;
+                    _novelManager.PlayTutorial3();
                     break;
             }
         }

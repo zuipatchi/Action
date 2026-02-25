@@ -32,6 +32,7 @@ namespace Turtorial.Injector
             builder.RegisterComponentInHierarchy<DashAfterImageMesh>().AsSelf();
 
             builder.RegisterComponentInHierarchy<CheckPoint>().AsSelf();
+            builder.RegisterComponentInHierarchy<DeadChecker>().AsSelf();
             builder.RegisterEntryPoint<TutorialCoordinator>().AsSelf();
             builder.RegisterComponentInHierarchy<EnemySpawner>().AsSelf();
         }
