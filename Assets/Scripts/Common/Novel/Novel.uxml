@@ -1,16 +1,16 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Scripts/Novel/novel.uss?fileID=7433441132597879392&amp;guid=ca97bcd299652bf48806915e29994c01&amp;type=3#novel"/>
+    <Style src="project://database/Assets/Scripts/Common/Novel/novel.uss?fileID=7433441132597879392&amp;guid=ca97bcd299652bf48806915e29994c01&amp;type=3#novel"/>
     <ui:VisualElement name="novelRoot" class="novel-root">
         <ui:VisualElement name="novelBottom" class="novel-bottom">
             <ui:VisualElement name="novelWindow" class="novel-window">
                 <ui:VisualElement name="header" class="novel-header">
                     <ui:VisualElement name="namePlate" class="novel-name-plate">
-                        <ui:Label name="nameLabel" text="NPC" class="novel-name"/>
+                        <ui:Label name="nameLabel" text="NPC" class="novel-name" style="-unity-font-definition: url(&quot;project://database/Assets/Scripts/NotoSansJP-VariableFont_wght.ttf?fileID=12800000&amp;guid=e8a4648fbaf380946bef36c1bb07afcd&amp;type=3#NotoSansJP-VariableFont_wght&quot;);"/>
                     </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:Label name="messageLabel" text="" class="novel-message"/>
+                <ui:Label name="messageLabel" text="" class="novel-message" style="-unity-font-definition: url(&quot;project://database/Assets/Scripts/NotoSansJP-VariableFont_wght.ttf?fileID=12800000&amp;guid=e8a4648fbaf380946bef36c1bb07afcd&amp;type=3#NotoSansJP-VariableFont_wght&quot;);"/>
                 <ui:VisualElement name="footer" class="novel-footer">
-                    <ui:Label name="hintLabel" text="▶ クリックで進む" class="novel-hint"/>
+                    <ui:Label name="hintLabel" text="▶ クリックで進む" class="novel-hint" style="-unity-font-definition: url(&quot;project://database/Assets/Scripts/NotoSansJP-VariableFont_wght.ttf?fileID=12800000&amp;guid=e8a4648fbaf380946bef36c1bb07afcd&amp;type=3#NotoSansJP-VariableFont_wght&quot;);"/>
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
