@@ -61,6 +61,8 @@ namespace Common.SceneManagement
                     nextScene = SceneManager.GetSceneByBuildIndex((int)next);
                 }
 
+                BuildLifetimeScope(nextScene);
+                
                 // nextScene をメイン(Active)にする
                 SceneManager.SetActiveScene(nextScene);
 
@@ -70,7 +72,6 @@ namespace Common.SceneManagement
                     await SceneManager.UnloadSceneAsync(activeScene).WithCancellation(ct);
                 }
 
-                BuildLifetimeScope(nextScene);
             }
             catch (OperationCanceledException)
             {
